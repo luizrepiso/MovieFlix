@@ -28,10 +28,11 @@ public class Genre implements Serializable {
 
 	}
 
-	public Genre(Long id, String name) {
+	public Genre(Long id, String name, List<Movie> movies) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.movies = movies;
 	}
 
 	public Long getId() {
@@ -48,6 +49,14 @@ public class Genre implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
 	}
 
 	@Override
