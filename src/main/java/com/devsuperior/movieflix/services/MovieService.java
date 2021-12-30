@@ -24,10 +24,16 @@ public class MovieService {
 	
 	
 	public Page<MovieGenreDTO> findAll(Pageable pageable, Long genreId) {
-		Pageable sortedByTitle = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("title"));
-		Page<Movie> movies = repository.findAllOrGenreId(pageable.getSort().isSorted() ? pageable : sortedByTitle,
-				genreId);
-		return movies.map(x -> new MovieGenreDTO(x));
+		if(genreId != null) {
+			Pageable sortedByTitle = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("title"));
+			Page<Movie> movies = repository.findAllOrGenreId(pageable.getSort().isSorted() ? pageable : sortedByTitle,
+					genreId);
+			return movies.map(x -> new MovieGenreDTO(x));			
+		}else {
+			Pageable sortedByTitle = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("title"));
+			Page<Movie> movies = repository.findAll(pageable.getSort().isSorted() ? pageable : sortedByTitle);
+			return movies.map(x -> new MovieGenreDTO(x));	
+		}
 	}
 
 	@Transactional(readOnly = true)

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
@@ -29,8 +28,7 @@ public class MovieResource {
 	private ReviewService reviewService;
 
 	@GetMapping
-	public ResponseEntity<Page<MovieGenreDTO>> findAll(Pageable pageable,
-			@RequestParam(name = "genreId", defaultValue = "0L") Long genreId) {
+	public ResponseEntity<Page<MovieGenreDTO>> findByGenreId(Pageable pageable, Long genreId) {
 		Page<MovieGenreDTO> movies = movieService.findAll(pageable, genreId);
 		return ResponseEntity.ok(movies);
 	}
