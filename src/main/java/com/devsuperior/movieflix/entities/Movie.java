@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,26 +22,30 @@ public class Movie implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String title;
 	private String subTitle;
 	private Integer year;
 	private String imgUrl;
+	@Column(columnDefinition = "TEXT")
 	private String synopsis;
-
-	@ManyToOne
-	@JoinColumn(name = "genre")
-	private Genre genre;
-
+	
 	@OneToMany(mappedBy = "movie")
 	private List<Review> reviews = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
+
+	
+
+	public String getName;
 
 	public Movie() {
 
 	}
 
 	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
-		super();
+	
 		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
@@ -63,7 +68,7 @@ public class Movie implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}

@@ -24,18 +24,19 @@ public class Review implements Serializable {
 	private String text;
 
 	@ManyToOne
-	@JoinColumn(name = "movie")
+	@JoinColumn(name = "movie_id")
 	private Movie movie;
 
 	@ManyToOne
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "user_id")
 	private User user;
-
+	
 	public Review() {
-
+		
 	}
+	
 
-	public Review(Long id, String text, Movie movie, User user) {
+	public Review(Long id, String text, User user, Movie movie) {
 		super();
 		this.id = id;
 		this.text = text;
